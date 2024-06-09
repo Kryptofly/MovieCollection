@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 8px;
+        }
+        .movie {
+            margin-bottom: 20px;
+        }
+        .movie h2 {
+            margin: 0;
+        }
+        .movie p {
+            margin: 5px 0;
+        }
+        form {
+            display: inline;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Collection</h1>
+        <a href="{{ url_for('add_movie') }}">Add New Movie</a>
+        <div>
+            {% for movie in movies %}
+                <div class="movie">
+                    <h2>{{ movie.title }}</h2>
+                    <p>Directed by: {{ movie.director }}</p>
+                    <form method="post" action="{{ url_for('delete_movie', id=movie.id) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
